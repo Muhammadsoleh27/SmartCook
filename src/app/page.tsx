@@ -1,103 +1,184 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import SwiperImg from "@/components/swiper/swiper";
+import searchFood from "@/assets/image copy 4.png";
+import { FoodCategory } from "./../stores/foodCategory";
+import Link from "next/link";
+import { products } from "./../stores/product";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+// Type for FoodCategory items
+interface FoodItem {
+  id: string;
+  foodName: string;
+  imageSearchUrl: string;
+  status: boolean;
+}
+
+const Page: React.FC = () => {
+  const [randomInt, setRandomInt] = useState<number | null>(null);
+  const [randomInti, setRandomInti] = useState<number | null>(null);
+  const [searchVal, setSearchVal] = useState<string>("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const random = Math.floor(Math.random() * FoodCategory.length);
+    const product = Math.floor(Math.random() * products.length);
+    setRandomInt(random);
+    setRandomInti(product);
+  }, []);
+
+  function navigateToRecipe(id: string) {
+    router.push(`/recipes/${id}`);
+  }
+
+  const filterSearch: FoodItem[] = FoodCategory.filter((e: FoodItem) =>
+    e.foodName.toLowerCase().includes(searchVal.toLowerCase())
+);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <div className="py-7 w-[70%]">
+      {/* Header and Search */}
+      <section className="flex justify-between mb-10">
+        <div className="flex items-center gap-5">
+          <div className="flex items-center bg-white py-2 px-4 rounded-xl w-[330px] gap-2">
+            <Image src={searchFood} alt="search icon" width={30} height={30} />
+            <input
+              type="text"
+              className="w-full outline-0"
+              placeholder="What do you want to prepare today..."
+              value={searchVal}
+              onChange={(e) => setSearchVal(e.target.value)}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <button className="bg-yellow-400 py-2 px-5 text-white rounded-lg cursor-pointer">
+          My Products
+        </button>
+      </section>
+
+      {/* Swiper or Search Results */}
+      {searchVal == "" ? (
+        <div>
+          {/* Swiper Section */}
+          <section className="flex items-center justify-center py-10">
+            <SwiperImg />
+          </section>
+
+          {/* Category Section */}
+          <section className="my-10 pb-20">
+            <div className="my-7 flex items-center justify-between">
+              <h1 className="text-3xl font-bold">Категория</h1>
+              <button className="text-xl hover:text-yellow-500 cursor-pointer">
+                <Link href={"products"}>{`бештар -> `}</Link>
+              </button>
+            </div>
+            <section className="flex justify-between gap-4">
+              {randomInt !== null &&
+                products
+                  .slice(randomInt, Math.min(randomInt + 5, products.length))
+                  ?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col gap-2 group cursor-pointer w-[240px]"
+                    >
+                      <div className="overflow-hidden rounded-xl w-full">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
+                        {item.name}
+                      </p>
+                    </div>
+                  ))}
+            </section>
+          </section>
+
+          {/* Popular Foods Section */}
+          <section className="my-10">
+            <div className="my-7 flex items-center justify-between">
+              <h1 className="text-3xl font-bold">Таомҳои машҳур</h1>
+              <button className="text-xl hover:text-yellow-500 cursor-pointer">
+                <Link href={"recipes"}>{`бештар -> `}</Link>
+              </button>
+            </div>
+            <section className="flex justify-between gap-4">
+              {randomInti !== null &&
+                FoodCategory.slice(
+                  randomInti,
+                  Math.min(randomInti + 5, FoodCategory.length)
+                ).map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex flex-col gap-2 group cursor-pointer w-[240px]"
+                    onClick={() => navigateToRecipe(item.id)}
+                  >
+                    <div className="overflow-hidden rounded-xl w-full">
+                      <img
+                        src={item.imageSearchUrl}
+                        alt={item.foodName}
+                        className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                      />
+                    </div>
+                    <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
+                      {item.foodName}
+                    </p>
+                    <p
+                      className={`py-0.5 px-2 rounded-lg ${
+                        item.status
+                          ? "group-hover:bg-green-600 text-green-700 group-hover:text-white"
+                          : "group-hover:bg-red-600 text-red-700 group-hover:text-white"
+                      }`}
+                    >
+                      {item.status
+                        ? "it is allowed for muslim"
+                        : "it is not allowed for muslim"}
+                    </p>
+                  </div>
+                ))}
+            </section>
+          </section>
+        </div>
+      ) : (
+        <section className="flex items-center gap-8 flex-wrap">
+          {filterSearch?.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col gap-2 group cursor-pointer w-[240px]"
+              onClick={() => navigateToRecipe(item.id)}
+            >
+              <div className="overflow-hidden rounded-xl w-full">
+                <img
+                  src={item.imageSearchUrl}
+                  alt={item.foodName}
+                  className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                />
+              </div>
+              <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
+                {item.foodName}
+              </p>
+              <p
+                className={`py-0.5 px-2 rounded-lg ${
+                  item.status
+                    ? "group-hover:bg-green-600 text-green-700 group-hover:text-white"
+                    : "group-hover:bg-red-600 text-red-700 group-hover:text-white"
+                }`}
+              >
+                {item.status
+                  ? "it is allowed for muslim"
+                  : "it is not allowed for muslim"}
+              </p>
+            </div>
+          ))}
+        </section>
+      )}
     </div>
   );
-}
+};
+
+export default Page;
