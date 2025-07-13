@@ -124,11 +124,10 @@ export const generateContentAtom = atom(
         ...prevHistory,
         { role: "model", parts: [{ text: aiText }] },
       ]);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Failed to fetch AI response:", error);
       set(chatHistoryAtom, (prevHistory) => [
         ...prevHistory,
-        { role: "model", parts: [{ text: `Error: ${error.message}` }] }, // Add error to chat
       ]);
     } finally {
       set(isLoadingAtom, false);
