@@ -5,7 +5,6 @@ This project is an intelligent recipe assistant called **SmartCook**, built with
 ## 🔗 Live Demo
 
 👉 [Click here to try](https://smart-cook-tj.vercel.app/)  
-⚠️ *Note: Some features like AI recipe generation may not work without a configured API key.*
 
 ## ✨ Features
 
