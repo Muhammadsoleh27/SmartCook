@@ -146,11 +146,12 @@ const Page: React.FC = () => {
               className="flex flex-col gap-2 group cursor-pointer w-[240px]"
               onClick={() => navigateToRecipe(item.id)}
             >
-              <div className="overflow-hidden rounded-xl w-full">
-                <img
+              <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+                <Image
                   src={item.imageSearchUrl}
                   alt={item.foodName}
-                  className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                  fill
+                  className="object-cover transition duration-300 transform group-hover:scale-110"
                 />
               </div>
               <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
