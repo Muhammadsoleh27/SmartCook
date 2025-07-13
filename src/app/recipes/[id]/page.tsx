@@ -5,6 +5,7 @@ import { FoodRecept } from "../../../stores/foodStore";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FoodCategory } from "@/stores/foodCategory";
+import Image from "next/image";
 
 // Define the structure of your food item object
 interface FoodItem {
@@ -38,7 +39,11 @@ export default function FoodDetailPage() {
   const forImage = FoodCategory.find((e) => e.id === id);
 
   if (!arancini) {
-    return <div className="text-2xl flex items-center justify-center w-[70%] h-[100vh]">Таом ёфта нашуд.</div>; // "Recipe not found" in Tajik
+    return (
+      <div className="text-2xl flex items-center justify-center w-[70%] h-[100vh]">
+        Таом ёфта нашуд.
+      </div>
+    ); // "Recipe not found" in Tajik
   }
 
   const videoId = getYouTubeVideoId(arancini.linkFood);
@@ -47,11 +52,13 @@ export default function FoodDetailPage() {
     <div className="min-h-screen w-[70%] bg-gray-50 font-inter text-gray-800 antialiased">
       {/* Hero Section */}
       <section className="relative h-96 w-full overflow-hidden rounded-b-3xl shadow-lg">
-        <img
-          src={forImage?.imageSearchUrl}
-          alt={forImage?.foodName}
+        <Image
+          src={forImage?.imageSearchUrl || "/fallback.jpg"}
+          alt={forImage?.foodName || "Food image"}
+          fill
           className="absolute inset-0 h-full w-full object-cover"
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <div className="relative z-10 flex h-full flex-col justify-end p-6 text-white md:p-10">
           <h1 className="mb-2 text-4xl font-bold md:text-5xl">

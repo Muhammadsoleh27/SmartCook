@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import { products } from "@/stores/product";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -17,13 +18,14 @@ const Products = () => {
           <div
             key={item.id}
             className="flex flex-col gap-2 group cursor-pointer w-[300px]"
-            onClick={() => navigateToRecipe(item.id)}
+            onClick={() => navigateToRecipe(item.id.toString())}
           >
-            <div className="overflow-hidden rounded-xl w-[100%]">
-              <img
+            <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+              <Image
                 src={item.image}
                 alt={item.name}
-                className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                fill
+                className="object-cover transition duration-300 transform group-hover:scale-110"
               />
             </div>
             <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">

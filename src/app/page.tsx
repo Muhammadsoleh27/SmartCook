@@ -8,14 +8,6 @@ import Link from "next/link";
 import { products } from "./../stores/product";
 import { useRouter } from "next/navigation";
 
-// Type for FoodCategory items
-interface FoodItem {
-  id: string;
-  foodName: string;
-  imageSearchUrl: string;
-  status: boolean;
-}
-
 const Page: React.FC = () => {
   const [randomInt, setRandomInt] = useState<number | null>(null);
   const [randomInti, setRandomInti] = useState<number | null>(null);
@@ -34,9 +26,9 @@ const Page: React.FC = () => {
     router.push(`/recipes/${id}`);
   }
 
-  const filterSearch: FoodItem[] = FoodCategory.filter((e: FoodItem) =>
-    e.foodName.toLowerCase().includes(searchVal.toLowerCase())
-);
+  const filterSearch = FoodCategory.filter((item) =>
+    item.foodName.toLowerCase().includes(searchVal.toLowerCase())
+  );
 
   return (
     <div className="py-7 w-[70%]">
@@ -84,11 +76,12 @@ const Page: React.FC = () => {
                       key={index}
                       className="flex flex-col gap-2 group cursor-pointer w-[240px]"
                     >
-                      <div className="overflow-hidden rounded-xl w-full">
-                        <img
+                      <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+                        <Image
                           src={item.image}
                           alt={item.name}
-                          className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                          fill
+                          className="object-cover transition duration-300 transform group-hover:scale-110"
                         />
                       </div>
                       <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
@@ -118,11 +111,12 @@ const Page: React.FC = () => {
                     className="flex flex-col gap-2 group cursor-pointer w-[240px]"
                     onClick={() => navigateToRecipe(item.id)}
                   >
-                    <div className="overflow-hidden rounded-xl w-full">
-                      <img
+                    <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+                      <Image
                         src={item.imageSearchUrl}
                         alt={item.foodName}
-                        className="w-full h-[200px] transition duration-300 transform group-hover:scale-110"
+                        fill
+                        className="object-cover transition duration-300 transform group-hover:scale-110"
                       />
                     </div>
                     <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
