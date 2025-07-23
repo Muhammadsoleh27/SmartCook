@@ -5,7 +5,7 @@ import React from "react";
 
 export default function SmartCookHomePage() {
   return (
-    <div className="min-h-screen w-[70%] bg-gradient-to-br from-blue-50 to-green-50 font-inter text-gray-800 antialiased">
+    <div className="min-h-screen md:w-[70%] w-[100%] bg-gradient-to-br from-blue-50 to-green-50 font-inter text-gray-800 antialiased">
       {/* Hero Section */}
       <section className="relative py-20 px-4 text-center md:py-32 bg-white shadow-md rounded-b-3xl overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-green-100 opacity-50"></div>

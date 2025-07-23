@@ -5,7 +5,7 @@ import ChatDisplay from "@/components/chatDis/ChatDisplay";
 
 export default function HomePage() {
   return (
-    <div className="app-container w-[70%]">
+    <div className="app-container md:w-[70%] w-[100%]">
       <header className="app-header">
         <h1 className="text-3xl">CookGPT</h1>
       </header>

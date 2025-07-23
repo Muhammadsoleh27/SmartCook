@@ -31,15 +31,15 @@ const Page: React.FC = () => {
   );
 
   return (
-    <div className="py-7 w-[70%]">
+    <div className="py-7 w-[90%] m-auto md:w-[70%]">
       {/* Header and Search */}
-      <section className="flex justify-between mb-10">
+      <section className="flex justify-between mb-10 md:gap-0 gap-4">
         <div className="flex items-center gap-5">
-          <div className="flex items-center bg-white py-2 px-4 rounded-xl w-[330px] gap-2">
+          <div className="flex items-center bg-white py-2 px-4 h-full rounded-xl md:w-[330px] gap-2">
             <Image src={searchFood} alt="search icon" width={30} height={30} />
             <input
               type="text"
-              className="w-full outline-0"
+              className="w-full h-full outline-0"
               placeholder="What do you want to prepare today..."
               value={searchVal}
               onChange={(e) => setSearchVal(e.target.value)}
@@ -67,14 +67,14 @@ const Page: React.FC = () => {
                 <Link href={"products"}>{`бештар -> `}</Link>
               </button>
             </div>
-            <section className="flex justify-between gap-4">
+            <section className="flex gap-4 overflow-x-auto px-4">
               {randomInt !== null &&
                 products
                   .slice(randomInt, Math.min(randomInt + 5, products.length))
                   ?.map((item, index) => (
                     <div
                       key={index}
-                      className="flex flex-col gap-2 group cursor-pointer w-[240px]"
+                      className="flex-shrink-0 flex flex-col gap-2 group cursor-pointer w-[240px]"
                     >
                       <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
                         <Image
@@ -95,12 +95,14 @@ const Page: React.FC = () => {
           {/* Popular Foods Section */}
           <section className="my-10">
             <div className="my-7 flex items-center justify-between">
-              <h1 className="text-3xl font-bold">Таомҳои машҳур</h1>
+              <h1 className="text-3xl font-bold">
+                Таомҳои <br className="md:hidden block" /> машҳур
+              </h1>
               <button className="text-xl hover:text-yellow-500 cursor-pointer">
                 <Link href={"recipes"}>{`бештар -> `}</Link>
               </button>
             </div>
-            <section className="flex justify-between gap-4">
+            <section className="flex gap-4 overflow-x-auto px-4">
               {randomInti !== null &&
                 FoodCategory.slice(
                   randomInti,
@@ -108,7 +110,7 @@ const Page: React.FC = () => {
                 ).map((item) => (
                   <div
                     key={item.id}
-                    className="flex flex-col gap-2 group cursor-pointer w-[240px]"
+                    className="flex-shrink-0 flex flex-col gap-2 group cursor-pointer w-[240px]"
                     onClick={() => navigateToRecipe(item.id)}
                   >
                     <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
@@ -123,7 +125,7 @@ const Page: React.FC = () => {
                       {item.foodName}
                     </p>
                     <p
-                      className={`py-0.5 px-2 rounded-lg ${
+                      className={`py-0.5 px-2 rounded-lg w-fit text-sm font-medium ${
                         item.status
                           ? "group-hover:bg-green-600 text-green-700 group-hover:text-white"
                           : "group-hover:bg-red-600 text-red-700 group-hover:text-white"
@@ -139,11 +141,11 @@ const Page: React.FC = () => {
           </section>
         </div>
       ) : (
-        <section className="flex items-center gap-8 flex-wrap">
+        <section className="flex gap-6 overflow-x-auto md:flex-wrap md:justify-center px-4">
           {filterSearch?.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col gap-2 group cursor-pointer w-[240px]"
+              className="flex-shrink-0 flex flex-col gap-2 group cursor-pointer w-[240px]"
               onClick={() => navigateToRecipe(item.id)}
             >
               <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
@@ -158,7 +160,7 @@ const Page: React.FC = () => {
                 {item.foodName}
               </p>
               <p
-                className={`py-0.5 px-2 rounded-lg ${
+                className={`py-0.5 px-2 rounded-lg w-fit text-sm font-medium ${
                   item.status
                     ? "group-hover:bg-green-600 text-green-700 group-hover:text-white"
                     : "group-hover:bg-red-600 text-red-700 group-hover:text-white"

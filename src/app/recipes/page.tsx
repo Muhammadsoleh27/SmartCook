@@ -11,16 +11,16 @@ const Recipes = () => {
     router.push(`/recipes/${id}`);
   }
   return (
-    <div className="py-7 w-[70%]">
+    <div className="py-7 md:w-[70%] w-[90%] m-auto">
       <h1 className="mb-7 text-4xl font-bold">All Recipes</h1>
       <section className="flex gap-x-5 gap-y-8 flex-wrap">
         {FoodCategory.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col gap-2 group cursor-pointer w-[300px]"
+            className="flex flex-col gap-2 group cursor-pointer w-[45%] md:w-[300px]"
             onClick={() => navigateToRecipe(item.id)}
           >
-            <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+            <div className="relative overflow-hidden rounded-xl w-full md:h-[200px] h-[20vh]">
               <Image
                 src={item.imageSearchUrl}
                 alt={item.foodName}

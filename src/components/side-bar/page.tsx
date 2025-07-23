@@ -21,59 +21,59 @@ const Side_Bar = () => {
   }, []);
 
   return (
-    <div className="md:w-[21%] w-[100%] bg-white md:h-[100vh] sticky md:top-0  bottom-0 md:left-0 p-5 pl-10">
+    <div className="md:w-[21%] w-[100%] bg-white md:h-[100vh] z-20 sticky md:top-0  bottom-0 md:left-0 p-5 md:pl-10">
       <section className="md:flex items-center mb-8 hidden">
         <Image src={logoIcon} alt="logo"/>
         <Image src={nameLogo} alt="logo"/>
       </section>
-      <section className="flex md:flex-col justify-center gap-3 mb-[20%]">
+      <section className="flex md:flex-col md:justify-center md:gap-3 justify-evenly md:mb-[20%]">
         <Link href={"/"}>
           <button
-            className={`flex md:flex-row flex-col items-center gap-5 text-xl bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] hover:bg-yellow-400 group cursor-pointer ${
-              pathname === "/" ? "bg-yellow-400" : "bg-[#f5f5f584]"
+            className={`flex md:flex-row flex-col items-center md:gap-5 md:text-xl md:bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] hover:border-yellow-400 border-b-1 md:hover:bg-yellow-400 group cursor-pointer ${
+              pathname === "/" ? "bg-yellow-400" : "md:bg-[#f5f5f584]"
             }`}
           >
-            <Image src={menuIcon} alt="menu icon" className="w-[50px]" />
+            <Image src={menuIcon} alt="menu icon" className="md:w-[50px] w-[30px]" />
             Menu
           </button>
         </Link>
         <Link href={"/recipes"}>
           <button
-            className={`flex md:flex-row flex-col items-center gap-6 text-xl bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] pl-4 hover:bg-yellow-400 group cursor-pointer ${
-              pathname === "/recipes" ? "bg-yellow-400" : "bg-[#f5f5f584]"
+            className={`flex md:flex-row flex-col items-center md:gap-6 md:text-xl md:bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] pl-4 hover:border-yellow-400 border-b-1 md:hover:bg-yellow-400 group cursor-pointer ${
+              pathname === "/recipes" ? "bg-yellow-400" : "md:bg-[#f5f5f584]"
             }`}
           >
-            <Image src={recipeta} alt="menu icon" className="w-[35px]" />
+            <Image src={recipeta} alt="menu icon" className="md:w-[35px] w-[30px]" />
             Recipes
           </button>
         </Link>
         <Link href={"/addrecipes"}>
           <button
-            className={`flex md:flex-row flex-col items-center gap-5 text-xl bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] hover:bg-yellow-400 group cursor-pointer ${
-              pathname === "/addrecipes" ? "bg-yellow-400" : "bg-[#f5f5f584]"
+            className={`flex md:flex-row flex-col items-center md:gap-5 md:text-xl md:bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] hover:border-yellow-400 border-b-1 md:hover:bg-yellow-400 group cursor-pointer ${
+              pathname === "/addrecipes" ? "bg-yellow-400" : "md:bg-[#f5f5f584]"
             }`}
           >
-            <Image src={recipetaAdd} alt="menu icon" className="w-[40px]" />
-            Add Recipes
+            <Image src={recipetaAdd} alt="menu icon" className="md:w-[40px] w-[30px]" />
+            <span>Add </span><span className="md:inline-block hidden">Recipes</span>
           </button>
         </Link>
         <Link href={"/cookGPT"}>
           <button
-            className={`flex md:flex-row flex-col items-center gap-4 text-xl bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] hover:bg-yellow-400 group cursor-pointer ${
-              pathname === "/cookGPT" ? "bg-yellow-400" : "bg-[#f5f5f584]"
+            className={`flex md:flex-row flex-col items-center md:gap-4 md:text-xl md:bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] hover:border-yellow-400 border-b-1 md:hover:bg-yellow-400 group cursor-pointer ${
+              pathname === "/cookGPT" ? "bg-yellow-400" : "md:bg-[#f5f5f584]"
             }`}
           >
-            <Image src={cookCPT} alt="menu icon" className="w-[50px]" />
+            <Image src={cookCPT} alt="menu icon" className="md:w-[50px] w-[30px]" />
             CookGPT
           </button>
         </Link>
         <Link href={"/about"}>
           <button
-            className={`flex md:flex-row flex-col items-center gap-6 text-xl bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] pl-4 hover:bg-yellow-400 group cursor-pointer ${
-              pathname === "/about" ? "bg-yellow-400" : "bg-[#f5f5f584]"
+            className={`flex md:flex-row flex-col items-center md:gap-6 text-xl md:bg-[#f5f5f584] md:w-[90%] p-2 rounded-xl h-[75px] pl-4 hover:border-yellow-400 border-b-1 md:hover:bg-yellow-400 group cursor-pointer ${
+              pathname === "/about" ? "bg-yellow-400" : "md:bg-[#f5f5f584]"
             }`}
           >
-            <Image src={aboutIcon} alt="menu icon" className="w-[35px]" />
+            <Image src={aboutIcon} alt="menu icon" className="md:w-[35px] w-[30px]" />
             About
           </button>
         </Link>
