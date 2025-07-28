@@ -16,7 +16,7 @@ import Image from "next/image";
 
 const SwiperImg = () => {
   return (
-    <div className="w-[100%] h-[500px]">
+    <div className="w-[100%] md:h-[500px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
