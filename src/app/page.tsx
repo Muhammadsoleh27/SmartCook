@@ -31,78 +31,82 @@ const Page: React.FC = () => {
   );
 
   return (
-    <div className="py-7 w-[90%] m-auto md:w-[70%]">
-      {/* Header and Search */}
-      <section className="flex justify-between mb-10 md:gap-0 gap-4">
-        <div className="flex items-center gap-5">
-          <div className="flex items-center bg-white py-2 px-4 h-full rounded-xl md:w-[330px] gap-2">
-            <Image src={searchFood} alt="search icon" width={30} height={30} />
-            <input
-              type="text"
-              className="w-full h-full outline-0"
-              placeholder="What do you want to prepare today..."
-              value={searchVal}
-              onChange={(e) => setSearchVal(e.target.value)}
-            />
-          </div>
+    <div className="py-7 w-[90%] md:ml-[20%] m-auto md:w-[70%] mb-10 md:mb-0">
+      {/* Header and Search Section */}
+      <section className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+        <div className="flex items-center bg-white py-3 px-5 rounded-full shadow-md md:w-[400px] w-full border border-gray-200 focus-within:ring-2 focus-within:ring-yellow-400">
+          <Image src={searchFood} alt="Search Icon" width={24} height={24} className="mr-3 opacity-70" />
+          <input
+            type="text"
+            className="w-full outline-none text-gray-700 placeholder-gray-400 text-lg"
+            placeholder="What do you want to prepare today?"
+            value={searchVal}
+            onChange={(e) => setSearchVal(e.target.value)}
+          />
         </div>
-        <button className="bg-yellow-400 py-2 px-5 text-white rounded-lg cursor-pointer">
+        <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full md:w-auto">
           My Products
         </button>
       </section>
 
-      {/* Swiper or Search Results */}
-      {searchVal == "" ? (
-        <div>
+      {/* Main Content Area: Swiper or Search Results */}
+      {searchVal === "" ? (
+        <>
           {/* Swiper Section */}
-          <section className="flex items-center justify-center py-10">
+          <section className="py-10">
             <SwiperImg />
           </section>
 
           {/* Category Section */}
           <section className="my-10 pb-20">
-            <div className="my-7 flex items-center justify-between">
-              <h1 className="text-3xl font-bold">Категория</h1>
-              <button className="text-xl hover:text-yellow-500 cursor-pointer">
-                <Link href={"products"}>{`бештар -> `}</Link>
-              </button>
+            <div className="flex items-center justify-between mb-7">
+              <h1 className="text-4xl font-extrabold text-gray-800">Категория</h1>
+              <Link href="/products">
+                <span className="text-xl text-yellow-600 hover:text-yellow-700 font-semibold transition duration-200 cursor-pointer">
+                  бештар &rarr;
+                </span>
+              </Link>
             </div>
-            <section className="flex gap-4 overflow-x-auto px-4">
+            <div className="flex gap-6 overflow-x-auto custom-scroll-bar pb-4 -mx-4 px-4">
               {randomInt !== null &&
                 products
                   .slice(randomInt, Math.min(randomInt + 5, products.length))
                   ?.map((item, index) => (
                     <div
                       key={index}
-                      className="flex-shrink-0 flex flex-col gap-2 group cursor-pointer w-[240px]"
+                      className="flex-shrink-0 flex flex-col gap-3 group cursor-pointer w-[280px] bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 p-3"
                     >
-                      <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+                      <div className="relative overflow-hidden rounded-lg w-full h-[200px]">
                         <Image
                           src={item.image}
                           alt={item.name}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-cover transition duration-300 transform group-hover:scale-110"
                         />
                       </div>
-                      <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
+                      <p className="mt-2 text-start text-2xl font-bold text-gray-800 group-hover:text-yellow-600">
                         {item.name}
                       </p>
                     </div>
                   ))}
-            </section>
+            </div>
           </section>
+          <hr className="my-10 border-t-2 border-gray-100" />
 
           {/* Popular Foods Section */}
           <section className="my-10">
-            <div className="my-7 flex items-center justify-between">
-              <h1 className="text-3xl font-bold">
+            <div className="flex items-center justify-between mb-7">
+              <h1 className="text-4xl font-extrabold text-gray-800">
                 Таомҳои <br className="md:hidden block" /> машҳур
               </h1>
-              <button className="text-xl hover:text-yellow-500 cursor-pointer">
-                <Link href={"recipes"}>{`бештар -> `}</Link>
-              </button>
+              <Link href="/recipes">
+                <span className="text-xl text-yellow-600 hover:text-yellow-700 font-semibold transition duration-200 cursor-pointer">
+                  бештар &rarr;
+                </span>
+              </Link>
             </div>
-            <section className="flex gap-4 overflow-x-auto px-4">
+            <div className="flex gap-6 overflow-x-auto custom-scroll-bar pb-4 -mx-4 px-4">
               {randomInti !== null &&
                 FoodCategory.slice(
                   randomInti,
@@ -110,68 +114,74 @@ const Page: React.FC = () => {
                 ).map((item) => (
                   <div
                     key={item.id}
-                    className="flex-shrink-0 flex flex-col gap-2 group cursor-pointer w-[240px]"
+                    className="flex-shrink-0 flex flex-col gap-3 group cursor-pointer w-[280px] bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 p-3"
                     onClick={() => navigateToRecipe(item.id)}
                   >
-                    <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
+                    <div className="relative overflow-hidden rounded-lg w-full h-[200px]">
                       <Image
                         src={item.imageSearchUrl}
                         alt={item.foodName}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover transition duration-300 transform group-hover:scale-110"
                       />
                     </div>
-                    <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
+                    <p className="mt-2 text-start text-2xl font-bold text-gray-800 group-hover:text-yellow-600">
                       {item.foodName}
                     </p>
                     <p
-                      className={`py-0.5 px-2 rounded-lg w-fit text-sm font-medium ${
-                        item.status
-                          ? "group-hover:bg-green-600 text-green-700 group-hover:text-white"
-                          : "group-hover:bg-red-600 text-red-700 group-hover:text-white"
-                      }`}
+                      className={`py-1 px-3 rounded-full w-fit text-sm font-medium transition duration-300 ease-in-out
+                        ${
+                          item.status
+                            ? "bg-green-100 text-green-700 group-hover:bg-green-600 group-hover:text-white"
+                            : "bg-red-100 text-red-700 group-hover:bg-red-600 group-hover:text-white"
+                        }`}
                     >
-                      {item.status
-                        ? "it is allowed for muslim"
-                        : "it is not allowed for muslim"}
+                      {item.status ? "Halal" : "May Not Halal"}
                     </p>
                   </div>
                 ))}
-            </section>
-          </section>
-        </div>
-      ) : (
-        <section className="flex gap-6 overflow-x-auto md:flex-wrap md:justify-center px-4">
-          {filterSearch?.map((item) => (
-            <div
-              key={item.id}
-              className="flex-shrink-0 flex flex-col gap-2 group cursor-pointer w-[240px]"
-              onClick={() => navigateToRecipe(item.id)}
-            >
-              <div className="relative overflow-hidden rounded-xl w-full h-[200px]">
-                <Image
-                  src={item.imageSearchUrl}
-                  alt={item.foodName}
-                  fill
-                  className="object-cover transition duration-300 transform group-hover:scale-110"
-                />
-              </div>
-              <p className="mt-2 text-start group-hover:text-yellow-500 text-2xl font-bold">
-                {item.foodName}
-              </p>
-              <p
-                className={`py-0.5 px-2 rounded-lg w-fit text-sm font-medium ${
-                  item.status
-                    ? "group-hover:bg-green-600 text-green-700 group-hover:text-white"
-                    : "group-hover:bg-red-600 text-red-700 group-hover:text-white"
-                }`}
-              >
-                {item.status
-                  ? "it is allowed for muslim"
-                  : "it is not allowed for muslim"}
-              </p>
             </div>
-          ))}
+          </section>
+        </>
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-5">
+          {filterSearch.length > 0 ? (
+            filterSearch.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col gap-3 group cursor-pointer bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 p-4"
+                onClick={() => navigateToRecipe(item.id)}
+              >
+                <div className="relative overflow-hidden rounded-lg w-full h-[220px]">
+                  <Image
+                    src={item.imageSearchUrl}
+                    alt={item.foodName}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition duration-300 transform group-hover:scale-110"
+                  />
+                </div>
+                <p className="mt-2 text-start text-xl font-bold text-gray-800 group-hover:text-yellow-600">
+                  {item.foodName}
+                </p>
+                <p
+                  className={`py-1 px-3 rounded-full w-fit text-sm font-medium transition duration-300 ease-in-out
+                    ${
+                      item.status
+                        ? "bg-green-100 text-green-700 group-hover:bg-green-600 group-hover:text-white"
+                        : "bg-red-100 text-red-700 group-hover:bg-red-600 group-hover:text-white"
+                    }`}
+                >
+                  {item.status ? "Allowed for Muslims" : "Not Allowed for Muslims"}
+                </p>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-20 text-gray-500 text-2xl">
+              `No results found for {searchVal}, Try a different search!`
+            </div>
+          )}
         </section>
       )}
     </div>

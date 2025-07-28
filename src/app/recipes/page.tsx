@@ -11,7 +11,7 @@ const Recipes = () => {
     router.push(`/recipes/${id}`);
   }
   return (
-    <div className="py-7 md:w-[70%] w-[90%] m-auto">
+    <div className="py-7 w-[90%] md:ml-[20%] m-auto md:w-[70%] mb-10 md:mb-0">
       <h1 className="mb-7 text-4xl font-bold">All Recipes</h1>
       <section className="flex gap-x-5 gap-y-8 flex-wrap">
         {FoodCategory.map((item) => (
