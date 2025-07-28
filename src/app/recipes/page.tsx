@@ -33,11 +33,11 @@ const Recipes = () => {
             </p>
             {item.status ? (
               <p className="group-hover:bg-green-600 py-0.5 group-hover:px-2 group-hover:text-white rounded-lg">
-                it is allowed for muslim
+                Halal
               </p>
             ) : (
               <p className="group-hover:bg-red-600 py-0.5 group-hover:px-2 group-hover:text-white rounded-lg">
-                it is not allowed for muslim
+                May Not Halal
               </p>
             )}
           </div>

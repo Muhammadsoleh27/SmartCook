@@ -49,7 +49,7 @@ export default function FoodDetailPage() {
   const videoId = getYouTubeVideoId(arancini.linkFood);
 
   return (
-    <div className="min-h-screen md:ml-[20%] m-auto mb-10 md:mb-0 md:w-[70%] w-[100%] bg-gray-50 font-inter text-gray-800 antialiased">
+    <div className="min-h-screen md:ml-[20%] m-auto mb-15 md:mb-0 md:w-[70%] w-[100%] bg-gray-50 font-inter text-gray-800 antialiased">
       {/* Hero Section */}
       <section className="relative h-96 w-full overflow-hidden rounded-b-3xl shadow-lg">
         <Image
